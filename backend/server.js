@@ -1,9 +1,14 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import { connectDB } from './config/db.js';
 import userRouter from './routes/userRoute.js';
 import taskRouter from './routes/taskRoute.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 const app = express();
@@ -43,9 +48,18 @@ app.use('/api/user', userRouter);
 // mount tasks router at plural path so client requests to /api/tasks/* work
 app.use('/api/tasks', taskRouter);
 
-app.get('/', (req, res) => {
-    res.send('API is running...');
-});
+// Serve Static Assets in Production
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
+    });
+} else {
+    app.get('/', (req, res) => {
+        res.send('API is running...');
+    });
+}
 
 app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
