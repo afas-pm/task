@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import AuthContext from '../context/AuthContext'
+import { AuthContext } from '../context/AuthContext'
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(AuthContext)
@@ -16,4 +16,5 @@ const ProtectedRoute = ({ children }) => {
   return user ? children : null
 }
 
+ProtectedRoute.displayName = 'ProtectedRouteComponent'
 export default ProtectedRoute
