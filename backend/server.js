@@ -1,3 +1,4 @@
+import path from 'path';
 import express from 'express';
 import cors from 'cors';
 import 'dotenv/config';
@@ -45,6 +46,14 @@ app.use('/api/tasks', taskRouter);
 
 app.get('/', (req, res) => {
     res.send('API is running...');
+});
+
+const __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
