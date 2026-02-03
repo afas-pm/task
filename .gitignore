@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+.env.local
+.DS_Store
+*.log
+.vercel
+.render
+frontend/dist/
+backend/node_modules/
+frontend/node_modules/
