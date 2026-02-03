@@ -48,7 +48,7 @@ app.use('/api/user', userRouter);
 // mount tasks router at plural path so client requests to /api/tasks/* work
 app.use('/api/tasks', taskRouter);
 
-// Serve Static Assets in Production
+// Serve Static Assets
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
@@ -58,13 +58,18 @@ if (process.env.NODE_ENV === 'production') {
             path.resolve(__dirname, '../frontend/dist/index.html')
         );
     });
-    
 } else {
     app.get('/', (req, res) => {
         res.send('API is running...');
     });
 }
 
-app.listen(PORT, () => {
-    console.log(`Server started on http://localhost:${PORT}`);
-});
+// Start server only if not running on Vercel (serverless)
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Server started on http://localhost:${PORT}`);
+    });
+}
+
+// Export for Vercel serverless functions
+export default app;
