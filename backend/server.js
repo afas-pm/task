@@ -44,9 +44,13 @@ app.use('/api/:id/gp', (req, res, next) => {
 });
 
 //ROUTES
+// Handle both /api/user AND /user (for Vercel serverless functions)
 app.use('/api/user', userRouter);
-// mount tasks router at plural path so client requests to /api/tasks/* work
+app.use('/user', userRouter);
+
+// Handle both /api/tasks AND /tasks
 app.use('/api/tasks', taskRouter);
+app.use('/tasks', taskRouter);
 
 // Serve Static Assets
 if (process.env.NODE_ENV === 'production') {

@@ -3,10 +3,10 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/api"
     },
     {
-      "source": "/((?!assets/|vite.svg|favicon.ico|.*\\.js|.*\\.css).*)",
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]
