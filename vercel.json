@@ -6,7 +6,7 @@
       "destination": "/api/index.js"
     },
     {
-      "source": "/((?!assets/|favicon.ico|vite.svg).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
