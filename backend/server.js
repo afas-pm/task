@@ -52,21 +52,23 @@ app.use('/user', userRouter);
 app.use('/api/tasks', taskRouter);
 app.use('/tasks', taskRouter);
 
-// Serve Static Assets
+// Serve Static Assets & SPA Fallback
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
-
-    // Serve frontend for all non-API routes
-    app.get(/^(?!\/api).*/, (req, res) => {
-        res.sendFile(
-            path.resolve(__dirname, '../frontend/dist/index.html')
-        );
-    });
-} else {
-    app.get('/', (req, res) => {
-        res.send('API is running...');
-    });
 }
+
+// Serve frontend for all non-API routes (SPA Fallback)
+app.get(/^(?!\/api).*/, (req, res) => {
+    const indexPath = process.env.NODE_ENV === 'production'
+        ? path.resolve(__dirname, '../frontend/dist/index.html')
+        : path.resolve(__dirname, '../frontend/index.html');
+
+    // In dev, if the dist isn't built, this might fail, so we check existence
+    if (path.existsSync && !path.existsSync(indexPath)) {
+        return res.send('Frontend not built. Please run "npm run build" in frontend folder or use port 5173 for development.');
+    }
+    res.sendFile(indexPath);
+});
 
 // Start server only if not running on Vercel (serverless)
 if (!process.env.VERCEL) {
