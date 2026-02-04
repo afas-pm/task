@@ -1,4 +1,5 @@
 import path from 'path';
+import fs from 'fs';
 import { fileURLToPath } from 'url';
 import express from 'express';
 import cors from 'cors';
@@ -64,7 +65,7 @@ app.get(/^(?!\/api).*/, (req, res) => {
         : path.resolve(__dirname, '../frontend/index.html');
 
     // In dev, if the dist isn't built, this might fail, so we check existence
-    if (path.existsSync && !path.existsSync(indexPath)) {
+    if (!fs.existsSync(indexPath)) {
         return res.send('Frontend not built. Please run "npm run build" in frontend folder or use port 5173 for development.');
     }
     res.sendFile(indexPath);
