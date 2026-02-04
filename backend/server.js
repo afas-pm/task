@@ -58,6 +58,11 @@ if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
 }
 
+// Root route for API health check
+app.get('/', (req, res) => {
+    res.send('TaskFlow API is running...');
+});
+
 // Serve frontend for all non-API routes (SPA Fallback)
 app.get(/^(?!\/api).*/, (req, res) => {
     const indexPath = process.env.NODE_ENV === 'production'
