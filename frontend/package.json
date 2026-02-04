@@ -18,7 +18,6 @@
     "react-router-dom": "^6.28.0",
     "react-toastify": "^9.1.1",
     "tailwindcss": "^4.1.18",
-    "task-management-app": "file:..",
     "vite": "^7.2.4"
   },
   "devDependencies": {
