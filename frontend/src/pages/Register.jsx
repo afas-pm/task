@@ -43,19 +43,24 @@ const Register = () => {
   }
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
-        <div className="bg-gray-900 p-8 text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-red-600 rounded-full opacity-20 blur-xl"></div>
-          <h2 className="text-3xl font-bold text-white mb-2 relative z-10">Join TaskFlow</h2>
-          <p className="text-gray-400 relative z-10">Start organizing your life today</p>
+    <div className="min-h-[85vh] flex items-center justify-center p-6 selection:bg-[#D7263D] selection:text-white">
+      <div className="w-full max-w-md bg-white border-4 border-[#0F0F0F] shadow-hard-lg animate-slide-up relative overflow-hidden">
+        {/* Abstract Accent */}
+        <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#D7263D] -translate-x-16 translate-y-16 rotate-45 border-4 border-[#0F0F0F]"></div>
+
+        <div className="bg-[#0F0F0F] p-10 text-left border-b-4 border-[#D7263D]">
+          <h2 className="text-5xl font-black text-white italic tracking-tighter uppercase leading-none mb-2">Join</h2>
+          <div className="flex items-center gap-2">
+            <div className="w-12 h-1 bg-[#D7263D]"></div>
+            <p className="text-[#F9F6EE] text-[10px] font-black uppercase tracking-[0.4em] opacity-60">Operator Initialization</p>
+          </div>
         </div>
 
-        <div className="p-8">
-          <form onSubmit={onSubmit} className="space-y-5">
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2 ml-1" htmlFor="name">
-                Full Name
+        <div className="p-10">
+          <form onSubmit={onSubmit} className="space-y-6">
+            <div className="space-y-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-[#D7263D]" htmlFor="name">
+                Full Legal Name
               </label>
               <input
                 type="text"
@@ -63,14 +68,14 @@ const Register = () => {
                 id="name"
                 value={name}
                 onChange={onChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-all text-gray-800"
-                placeholder="John Doe"
+                className="w-full px-5 py-4 bg-[#F9F6EE] border-2 border-[#0F0F0F] text-sm font-black uppercase tracking-widest focus:bg-white focus:shadow-hard transition-all outline-none"
+                placeholder="OPERATOR NAME"
                 required
               />
             </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2 ml-1" htmlFor="email">
-                Email Address
+            <div className="space-y-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-[#D7263D]" htmlFor="email">
+                Comm Channel (Email)
               </label>
               <input
                 type="email"
@@ -78,14 +83,14 @@ const Register = () => {
                 id="email"
                 value={email}
                 onChange={onChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-all text-gray-800"
-                placeholder="john@example.com"
+                className="w-full px-5 py-4 bg-[#F9F6EE] border-2 border-[#0F0F0F] text-sm font-black uppercase tracking-widest focus:bg-white focus:shadow-hard transition-all outline-none"
+                placeholder="ID@DOMAIN.COM"
                 required
               />
             </div>
-            <div>
-              <label className="block text-gray-700 text-sm font-bold mb-2 ml-1" htmlFor="password">
-                Password
+            <div className="space-y-1">
+              <label className="text-[10px] font-black uppercase tracking-widest text-[#D7263D]" htmlFor="password">
+                Secure Key (Pass)
               </label>
               <input
                 type="password"
@@ -93,8 +98,8 @@ const Register = () => {
                 id="password"
                 value={password}
                 onChange={onChange}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-red-500 transition-all text-gray-800"
-                placeholder="Min 6 characters"
+                className="w-full px-5 py-4 bg-[#F9F6EE] border-2 border-[#0F0F0F] text-sm font-black uppercase tracking-widest focus:bg-white focus:shadow-hard transition-all outline-none"
+                placeholder="MIN 6 CHARS"
                 required
               />
             </div>
@@ -102,24 +107,22 @@ const Register = () => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-red-500/30 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
+              className="w-full bg-[#D7263D] text-white font-black uppercase italic tracking-[0.25em] text-sm py-5 border-2 border-[#0F0F0F] shadow-hard hover:bg-[#0F0F0F] hover:shadow-hard-red active:translate-x-1 active:translate-y-1 active:shadow-none transition-all disabled:opacity-30 disabled:cursor-not-allowed group mt-4 relative z-10"
             >
               {loading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-                  Creating Account...
+                <span className="flex items-center justify-center gap-3">
+                  <span className="w-4 h-4 bg-white animate-bounce"></span>
+                  ENCRYPTING...
                 </span>
-              ) : 'Create Account'}
+              ) : 'INITIALIZE'}
             </button>
           </form>
 
-          <div className="mt-8 text-center">
-            <p className="text-gray-500">
-              Already have an account?{' '}
-              <Link to="/login" className="text-gray-900 hover:text-red-600 font-bold transition-colors">
-                Login here
-              </Link>
-            </p>
+          <div className="mt-12 pt-8 border-t-2 border-[#F9F6EE] text-left">
+            <p className="text-[#0F0F0F] text-[10px] font-black uppercase tracking-widest opacity-60 mb-2">Existing Operator?</p>
+            <Link to="/login" className="text-xl font-black italic tracking-tighter text-[#0F0F0F] hover:text-[#D7263D] transition-colors border-b-4 border-transparent hover:border-[#D7263D] pb-1">
+              LINK ESTABLISHED ACCOUNT
+            </Link>
           </div>
         </div>
       </div>
