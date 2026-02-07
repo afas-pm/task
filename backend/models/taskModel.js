@@ -33,6 +33,14 @@ const taskSchema = new mongoose.Schema(
             enum: ['none', 'daily', 'weekly', 'monthly'],
             default: 'none'
         },
+        recurrenceDays: {
+            type: [String], // e.g., ['Mon', 'Wed', 'Fri']
+            default: []
+        },
+        tags: {
+            type: [String],
+            default: []
+        },
         owner: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',

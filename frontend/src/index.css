@@ -2,11 +2,10 @@
 
 @theme {
   --font-sans: 'Inter', 'Outfit', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Space Mono', 'Fira Code', monospace;
 
   --animate-fade-in: fade-in 0.3s ease-out;
   --animate-slide-up: slide-up 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --animate-shake: shake 0.5s ease-in-out;
+  --animate-wave: wave 8s linear infinite;
 
   @keyframes fade-in {
     from {
@@ -20,7 +19,7 @@
 
   @keyframes slide-up {
     from {
-      transform: translateY(30px);
+      transform: translateY(20px);
       opacity: 0;
     }
 
@@ -30,70 +29,112 @@
     }
   }
 
-  @keyframes shake {
+  @keyframes wave {
+    0% {
+      background-position: 0% 50%;
+    }
 
-    0%,
+    50% {
+      background-position: 100% 50%;
+    }
+
     100% {
-      transform: translateX(0);
-    }
-
-    25% {
-      transform: translateX(-5px);
-    }
-
-    75% {
-      transform: translateX(5px);
+      background-position: 0% 50%;
     }
   }
 }
 
 :root {
-  --bone: #F9F6EE;
-  --black: #0F0F0F;
-  --crimson: #D7263D;
-  --crimson-dark: #A71D2D;
+  --brand-blue: #3B82F6;
+  --brand-dark: #1F2937;
+  --brand-gray: #F9FAFB;
 }
 
 body {
-  @apply bg-[#F9F6EE] text-[#0F0F0F] font-sans antialiased;
-  background-image:
-    linear-gradient(45deg, rgba(215, 38, 61, 0.02) 25%, transparent 25%),
-    linear-gradient(-45deg, rgba(215, 38, 61, 0.02) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, rgba(215, 38, 61, 0.02) 75%),
-    linear-gradient(-45deg, transparent 75%, rgba(215, 38, 61, 0.02) 75%);
-  background-size: 40px 40px;
+  @apply bg-gray-50 text-gray-900 font-sans antialiased transition-colors duration-300;
   min-height: 100vh;
 }
 
-@utility shadow-hard {
-  box-shadow: 4px 4px 0px 0px rgba(15, 15, 15, 1);
+html.dark body {
+  @apply bg-gray-900 text-white;
 }
 
-@utility shadow-hard-red {
-  box-shadow: 6px 6px 0px 0px #D7263D;
+html.dark .bg-white {
+  @apply bg-gray-800 border-gray-700 text-white;
 }
 
-@utility shadow-hard-lg {
-  box-shadow: 10px 10px 0px 0px rgba(15, 15, 15, 1);
+html.dark .text-gray-900 {
+  @apply text-white;
 }
 
-@utility brutalist-border {
-  border: 3px solid #0F0F0F;
+html.dark .text-gray-800 {
+  @apply text-gray-100;
 }
 
-@utility brutalist-card {
-  @apply bg-white brutalist-border shadow-hard transition-all duration-200 active:translate-x-1 active:translate-y-1 active:shadow-none;
+html.dark .text-gray-700 {
+  @apply text-gray-200;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 10px;
+html.dark .text-gray-600 {
+  @apply text-gray-300;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--bone);
+html.dark .text-gray-500 {
+  @apply text-gray-400;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: var(--black);
-  border: 2px solid var(--bone);
+html.dark .border-gray-100,
+html.dark .border-gray-200 {
+  @apply border-gray-700;
+}
+
+html.dark .bg-gray-50,
+html.dark .bg-gray-100 {
+  @apply bg-gray-700;
+}
+
+html.dark input {
+  @apply bg-gray-800 text-white border-gray-600 placeholder-gray-500;
+}
+
+.auth-wave-bg {
+  background: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-wave-bg::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%233B82F6' fill-opacity='0.1' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.glass-card {
+  @apply bg-white rounded-2xl shadow-xl border border-gray-100;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E7EB;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D1D5DB;
 }

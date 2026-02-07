@@ -3,7 +3,7 @@ import Task from "../models/taskModel.js";
 //CREATE TASK
 export const createTask = async (req, res) => {
     try {
-        const { title, description, priority, dueDate, completed, color, recurrence } = req.body;
+        const { title, description, priority, dueDate, completed, color, recurrence, recurrenceDays, tags } = req.body;
         const newTask = new Task({
             title,
             description,
@@ -12,6 +12,8 @@ export const createTask = async (req, res) => {
             completed: completed === 'Yes' || completed === true,
             color,
             recurrence,
+            recurrenceDays,
+            tags,
             owner: req.user._id
         });
         const savedTask = await newTask.save();
